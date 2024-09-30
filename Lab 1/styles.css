@@ -5,7 +5,6 @@
     img {
         max-width: 400px;
     }
-
     ul {
         list-style-type: none;
         margin: 0;
@@ -13,11 +12,9 @@
         font-size: 28px;
         overflow: hidden;
     }
-
     li {
         float: left;
     }
-    
     li a {
         display: block;
         color: black;
@@ -25,7 +22,6 @@
         padding: 14px 16px;
         text-decoration: none;
     }
-    
     li a:hover {
         background-color: #182b49;
         color: white
@@ -41,6 +37,7 @@
         margin-right: 20px;
     }
     img {
+        max-width: 100%;
         margin-left: 20px;
         margin-right: 20px;
     }
@@ -60,6 +57,7 @@
         margin-right: 20px;
     }
     img {
+        max-width: 100%;
         margin-left: 20px;
         margin-right: 20px;
     }
@@ -89,14 +87,44 @@
     .grid-container {
         display: grid;
         grid-template-columns: auto auto auto auto;
-        max-height: 500px;  
         gap: 25px;
         margin-left: 20px;
         margin-right: 20px;
-      }
+    }
       .grid-item {
         color: white;
         background-color: #182b49;
+        max-height: 500px;
         text-align: center;
-      }
+        overflow: scroll;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #Navbar {
+        img {
+            max-width: 75%;
+        }
+        ul {
+            display: none;
+        }
+    }
+    #Section_1 {
+        h2 {
+            font-size: 24px;
+        }
+    }
+    #Section_2 {
+        h2 {
+            font-size: 24px;
+        }
+    }
+    #Section_3 {
+        h2 {
+            font-size: 24px;
+        }
+        .grid-container {
+            grid-template-columns: auto auto;
+        }
+    }
 }
