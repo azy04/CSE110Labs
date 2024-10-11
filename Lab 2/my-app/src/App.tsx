@@ -11,7 +11,7 @@ function App() {
     id: -1,
     title: "",
     content: "",
-    label: Label.other,
+    label: Label.personal,
     favorited: false,
   };
   const [createNote, setCreateNote] = useState(initialNote);
@@ -43,46 +43,59 @@ function App() {
   document.body.style.backgroundColor = currentTheme.body;
   return (
     <div className='app-container'>
-      <form className="note-form" onSubmit={createNoteHandler}>
-        <div>
-          <input
-            placeholder="Note Title"
-            onChange={(event) =>
-              setCreateNote({ ...createNote, title: event.target.value })}
-            required
-            style={{background: currentTheme.inputbackground, color: currentTheme.text}}
-          >
-          </input>
-        </div>
-  
-        <div>
-          <textarea
-            onChange={(event) =>
-              setCreateNote({ ...createNote, content: event.target.value })}
-            required
-            style={{background: currentTheme.inputbackground, color: currentTheme.text}}
-          >
-          </textarea>
-        </div>
-  
-        <div>
-          <select
-            onChange={(event) =>
-              setCreateNote({ ...createNote, label: event.target.value as unknown as Label })}
+      <div>
+        <form className="note-form" onSubmit={createNoteHandler}>
+          <div>
+            <input
+              placeholder="Note Title"
+              onChange={(event) =>
+                setCreateNote({ ...createNote, title: event.target.value })}
+              required
               style={{background: currentTheme.inputbackground, color: currentTheme.text}}
             >
-            <option value={Label.personal}>Personal</option>
-            <option value={Label.study}>Study</option>
-            <option value={Label.work}>Work</option>
-            <option value={Label.other}>Other</option>
-          </select>
-        </div>
-  
-        <div><button type="submit">Create Note</button></div>
-      </form>
+            </input>
+          </div>
+    
+          <div>
+            <textarea
+              onChange={(event) =>
+                setCreateNote({ ...createNote, content: event.target.value })}
+              required
+              style={{background: currentTheme.inputbackground, color: currentTheme.text}}
+            >
+            </textarea>
+          </div>
+    
+          <div>
+            <select
+              onChange={(event) =>
+                setCreateNote({ ...createNote, label: event.target.value as unknown as Label })}
+                style={{background: currentTheme.inputbackground, color: currentTheme.text}}
+              >
+              <option value={Label.personal}>Personal</option>
+              <option value={Label.study}>Study</option>
+              <option value={Label.work}>Work</option>
+              <option value={Label.other}>Other</option>
+            </select>
+          </div>
+    
+          <div><button type="submit">Create Note</button></div>
+
+          <h3 className='favorites-list-title' style={{color: currentTheme.text}}>List of Favorites:</h3>
+          <div className="favorites-list">
+            {notes.filter(note => note.favorited == true).map((note) => (
+              <p key={note.id} style={{color: currentTheme.text}}> {note.title} </p>
+            ))}
+          </div>
+
+          <div>
+            <button onClick={toggleTheme} type='button'> Toggle Theme </button>
+          </div>
+        </form>
+      </div>
 
       <div className="notes-grid">
-        {notes.map((note) => (
+        {notes.filter(note => note.id >= 0).map((note) => (
             <div
               key={note.id}
               className="note-item"
@@ -102,15 +115,6 @@ function App() {
               <p contentEditable={true} suppressContentEditableWarning={true}> {note.content} </p>
               <p contentEditable={true} suppressContentEditableWarning={true}> {note.label} </p>
             </div>
-        ))}
-      </div>
-
-      <div><button onClick={toggleTheme}> Toggle Theme </button></div>
-      
-      <div className="favorites-list">
-        <h3 style={{color: currentTheme.text}}>List of Favorites:</h3>
-        {notes.filter(note => note.favorited == true).map((note) => (
-          <p key={note.id} style={{color: currentTheme.text}}> {note.title} </p>
         ))}
       </div>
     </div>
